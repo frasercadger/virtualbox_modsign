@@ -10,10 +10,14 @@ def check_prerequisites():
     print('')
 
     # Check system is running SecureBoot
-    if subprocess.check_output('mokutil --sb-state', shell=True).rstrip() == 'SecureBoot enabled':
-        print 'SecureBoot enabled'
-    # No point doing this if system isn't running SB
-    else:
+    try:
+        if subprocess.check_output('mokutil --sb-state', shell=True).rstrip() == 'SecureBoot enabled':
+            print 'SecureBoot enabled'
+        # No point doing this if system isn't running SB
+        else:
+            print 'ERROR: SecureBoot not enabled'
+            return
+    except subprocess.CalledProcessError:
         print 'ERROR: SecureBoot not enabled'
         return
 
