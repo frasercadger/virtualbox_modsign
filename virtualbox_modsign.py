@@ -42,13 +42,16 @@ def check_prerequisites():
         print 'ERROR: OpenSSL not installed'
         return False
 
-    print('All prerequisites present')
     return True
 
 def main():
     print('Welcome to virtualbox_modsign')
     print('')
-    check_prerequisites()
+    if check_prerequisites() == True:
+        print('All prerequisites present')
+    else:
+        print ('Check for prerequisites failed')
+        return 1
 
 if __name__ == '__main__':
     main()
