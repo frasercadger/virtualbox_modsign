@@ -16,10 +16,10 @@ def check_prerequisites():
         # No point doing this if system isn't running SB
         else:
             print 'ERROR: SecureBoot not enabled'
-            return
+            return False
     except subprocess.CalledProcessError:
         print 'ERROR: SecureBoot not enabled'
-        return
+        return False
 
     # Check VBox modules are present
     mods_found = True
@@ -30,7 +30,7 @@ def check_prerequisites():
 
     if mods_found == False:
         print ('ERROR: modules missing')
-        return
+        return False
     else:
         print ('Modules present')
     
@@ -40,7 +40,10 @@ def check_prerequisites():
         print ('OpenSSL installed')
     else:
         print 'ERROR: OpenSSL not installed'
-        return
+        return False
+
+    print('All prerequisites present')
+    return True
 
 def main():
     print('Welcome to virtualbox_modsign')
