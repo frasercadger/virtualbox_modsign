@@ -33,6 +33,14 @@ def check_prerequisites():
         return
     else:
         print ('Modules present')
+    
+    # Check if OpenSSL is installed
+    from distutils.spawn import find_executable
+    if find_executable('openssl') is not None:
+        print ('OpenSSL installed')
+    else:
+        print 'ERROR: OpenSSL not installed'
+        return
 
 def main():
     print('Welcome to virtualbox_modsign')
